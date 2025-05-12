@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Interaction With C, C++</title>
+    <script>
+        var Module = {
+            onRuntimeInitialized: () => {
+                console.log("WebAssembly module is ready!");
+                reqForm.arg1.value = 1.5;
+                reqForm.arg2.value = 3.5;
+                reqForm.arg3.value = 0.5;
+            }
+        }
+        
+        const getResult = () => {
+            let arg1 = parseFloat(reqForm.arg1.value);
+            let arg2 = parseFloat(reqForm.arg2.value);
+            let arg3 = parseFloat(reqForm.arg3.value);
+
+            let result = Module.my_analysis(arg1, arg2, arg3);
+            reqForm.result.value = result;
+            console.log("Result: " + result);
+        }
+
+    </script>
+    <script src="call_analysis.js"></script>
+</head>
+<body>
+    <form method id="reqForm" onsubmit="false">
+        <input type="text" id="arg1" value="" size="3"> + 
+        <input type="text" id="arg2" value="" size="3"> X
+        <input type="text" id="arg3" value="" size="3"> = 
+        <input type="text" id="result" value="" size="3" readonly>
+        <input type="button" value="결과" onclick="getResult()">
+    </form>
+
+
+</body>
+
+</html>
